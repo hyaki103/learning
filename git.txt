@@ -1,0 +1,130 @@
+Git 設定
+
+#ユーザ名
+
+$ git config --global user.name "hyaki103"
+
+#メアド
+$ git config --global user.email h.b0720.w22@gmail.com
+
+
+#ローカルリポジトリの新規作成
+→リポジトリ・ファイルやディレクトリの状態・変更履歴を記録する
+"git init"コマンドでリポジトリを新規作成する
+.gitファイル
+
+$ git init
+Initialized empty Git repository in C:/Users/hyaki/OneDrive/work/git/.git/
+
+$ ls -la .git/
+total 11
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 ./
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 ../
+-rw-r--r-- 1 hyaki 197609  23 Feb 14 09:39 HEAD
+-rw-r--r-- 1 hyaki 197609 130 Feb 14 09:39 config
+-rw-r--r-- 1 hyaki 197609  73 Feb 14 09:39 description
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 hooks/
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 info/
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 objects/
+drwxr-xr-x 1 hyaki 197609   0 Feb 14 09:39 refs/
+
+# 既存ファイルのバージョン管理もgit initでOK
+
+# gitのワークフロー
+
+ローカルのファイルを編集
+↓
+1. ファイルの変更をステージングエリアへ追加(git add <file_name>)
+
+2. ローカルリポジトリにコミット(git commit)
+
+githubにリポジトリ作成
+gitにgithubの登録(?)
+$ git remote add origin https://github.com/hyaki103/intro_git.git
+
+
+3. リモートリポジトリにプッシュ(git push)
+$ git push -u origin master
+
+# commitの流れ
+複数ファイルを変更したときにコミットするファイルを選択するためにあるのがステージングエリア
+
+# 今あるファイルをすべてステージングする
+$ git add .
+
+コミットして変更を記録する
+コミットは変更をリポジトリ内に時系列で記録する
+
+一つの作業ごとに１コミット
+わかりやすいコミットメッセージ
+
+1 変更内容の要約
+2 空行
+3 変更理由
+
+$ git status
+
+# コミットの確認
+$ git log
+
+#　いろいろなファイルの変更
+・新規作成
+→特にコマンドは変わらない
+
+・ファイルの削除
+ステージングエリアへの追加が
+$ git remove <file_name>
+となる
+
+$ git log
+commitを打ち消す、このcimmitの状態に戻す、、というときにgit logのハッシュ値を利用する
+
+# 一行で表示する
+$ git log --oneline
+
+# 変更差分を確認する
+$ git log -p index.html
+
+# 変更差分を表示する
+$ git diff
+
+#ステージとの差分
+$ git diff 
+
+# ステージとコミットの差分
+$ git diff HEAD
+
+# githubへのプッシュ
+リモートリポジトリへの登録
+
+1. ローカルリポジトリにリモートリポジトリを登録する
+$ git remote add origin <URL>
+→今後はoriginという名前でgithubリポジトリにアクセスすることが出来る
+
+$ git push origin master<ここにはブランチを入力>
+→originリポジトリにmasterブランチをプッシュする
+
+管理しないファイル→.gitignoreファイルに指定することで管理から外すことが出来る
+・自動生成される
+・パスワードが記載されているファイル
+はバージョン管理を行わない
+
+.gitignoreファイルの書き方
+# #から始まる行はコメント
+# 指定したファイルを除外
+index.html
+# 特定のディレクトリを除外
+/root
+# あるディレクトリ配下を除外
+root/
+#　コミットしてしまったファイルを管理から外す
+$ git rm <file_name>
+$ git rm -r <dir_name>
+# ファイルは残す場合
+$ git rm --cached <file_name> ★gitignoreファイルに記載をすること
+
+ステージングエリアの変更を戻す
+$ git reset HEAD second.txt
+
+ローカルへ戻る
+$ git checkout second.txt
