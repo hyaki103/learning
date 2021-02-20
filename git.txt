@@ -128,3 +128,6 @@ $ git reset HEAD second.txt
 
 ローカルへ戻る
 $ git checkout second.txt
+
+ブランチ名の変更
+$ git branch -m <現在のブランチ> <新しいブランチ>
