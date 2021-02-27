@@ -1,0 +1,14 @@
+# 0225 python tips会
+DjangoBrothers
+→Django Girls
+→Django チュートリアル
+
+環境構築
+pipenv　poetry
+
+docstringは常に書く
+
+PEP8
+
+coockiecooker
+
